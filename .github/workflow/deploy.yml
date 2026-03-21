@@ -1,0 +1,19 @@
+name: Deploy to VPS
+on:
+  push:
+    branches:
+      - main # Укажи свою ветку (master или main)
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 72.60.74.204
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            git config --global --add safe.directory /home/ubuntu/chat
+            cd /home/ubuntu/chat
+            git pull origin main
