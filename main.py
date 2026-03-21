@@ -4,7 +4,7 @@ import time
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 
-app = FastAPI()
+app = FastAPI(root_path="/api")
 
 
 html = """
