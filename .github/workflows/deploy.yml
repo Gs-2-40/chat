@@ -14,6 +14,9 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            git config --global --add safe.directory /home/ubuntu/chat
-            cd /home/ubuntu/chat
+            git config --global --add safe.directory /home/ubuntu/dinochat
+            cd /home/ubuntu/dinochat
             git pull origin main
+            sudo systemctl daemon-reload
+            sudo systemctl restart chat
+            sudo systemctl status chat
