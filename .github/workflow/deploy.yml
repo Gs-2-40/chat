@@ -17,3 +17,7 @@ jobs:
             git config --global --add safe.directory /home/ubuntu/dinochat
             cd /home/ubuntu/dinochat
             git pull origin main
+            sudo systemctl daemon-reload
+            sudo systemctl restart chat
+            sudo systemctl status chat
+
