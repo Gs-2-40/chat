@@ -83,7 +83,7 @@ class Manager:
 manager = Manager()
 
 
-@app.get("/")
+@app.get("/ws")
 async def get():
     return HTMLResponse(html)
 
