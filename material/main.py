@@ -1,6 +1,5 @@
 from typing import Dict
-import time
-
+import asyncio
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 
@@ -97,7 +96,7 @@ async def websockets_endpoint(web_socket: WebSocket, client_id: int):
             data = await web_socket.receive_text()
             print(data)
             if str(client_id) in manager.active_connections:
-                time.sleep(0.5)
+                await asyncio.sleep(0.5)
                 await manager.send_single_message(f"Client #{client_id} says: {data}", str(client_id))
                 await manager.send_single_message(f'Server says: {data} {data}', str(client_id))
             else:
