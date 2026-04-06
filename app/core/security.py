@@ -2,7 +2,7 @@ import bcrypt
 import jwt
 import datetime
 from fastapi import HTTPException, status, Cookie
-from core.config import SECRET_KEY, ALGORITHM
+from app.core.config import SECRET_KEY, ALGORITHM
 
 async def get_current_user(
     # FastAPI сам посмотрит в куки и найдет там поле 'access_token'

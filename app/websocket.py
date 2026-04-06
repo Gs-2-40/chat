@@ -1,9 +1,9 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Cookie, Depends, status
-from services.connection import ConnectionManager
-from database import get_db
+from app.services.connection import ConnectionManager
+from app.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 import jwt
-from core.config import SECRET_KEY, ALGORITHM
+from app.core.config import SECRET_KEY, ALGORITHM
 
 router = APIRouter(prefix="/ws", tags=["WebSocket"])
 

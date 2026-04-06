@@ -1,9 +1,9 @@
 from fastapi import APIRouter, requests, Depends, Response
-from database import get_db
-from models import User
+from app.database import get_db
+from app.models import User
 from sqlalchemy.ext.asyncio import AsyncSession
-from core.security import verify_password, create_access_token, get_password_hash
-from core.config import path_to_avatar
+from app.core.security import verify_password, create_access_token, get_password_hash
+from app.core.config import path_to_avatar
 
 # Создаем объект роутера
 # prefix — добавится ко всем путям в этом файле

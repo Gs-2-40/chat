@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from models.base import Base
-from models.user import User
+from app.models.base import Base
+from app.models.user import User
 
 class Message(Base):
     '''Таблица сообщений - id content sender receiver timestamp'''

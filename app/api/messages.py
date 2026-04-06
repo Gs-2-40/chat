@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
-from core.config import html
+from app.core.config import html
 
 # Создаем объект роутера
 # prefix — добавится ко всем путям в этом файле
