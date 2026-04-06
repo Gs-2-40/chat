@@ -5,7 +5,7 @@ from app.core.config import html
 # Создаем объект роутера
 # prefix — добавится ко всем путям в этом файле
 # tags — поможет сгруппировать методы в документации Swagger (/docs)
-router = APIRouter(tags=["static"])
+router = APIRouter(prefix="/messages", tags=["static"])
 
 
 @router.get("/ping")
