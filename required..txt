@@ -3,3 +3,6 @@ fastapi
 websockets
 bcrypt
 PyJWT
+sqlalchemy
+aiosqlite
+jwt
