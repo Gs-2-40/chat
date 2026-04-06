@@ -1,6 +1,6 @@
 from fastapi import APIRouter, requests, Depends, Response
 from app.database import get_db
-from app.models import User
+from app.models.user import User
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.security import verify_password, create_access_token, get_password_hash
 from app.core.config import path_to_avatar
