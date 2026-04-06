@@ -14,6 +14,8 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            ping -c 5 72.60.74.204
+            nc -zv -w 5 72.60.74.204 22
             git config --global --add safe.directory /home/ubuntu/dinochat
             cd /home/ubuntu/dinochat
             git pull origin main
