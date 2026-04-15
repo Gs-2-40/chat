@@ -4,16 +4,20 @@ from app.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 import jwt
 from app.core.config import SECRET_KEY, ALGORITHM
+from app.models.message import Message
 
 router = APIRouter(prefix="/ws", tags=["WebSocket"])
 
 manager = ConnectionManager()
 
-async def get(data, user_id, db):
-    pass
+async def get(data, user_id: int, db: AsyncSession):
+    await manager.send_single_message(db.query(Message).filter(Message.sender_id == user_id or Message.receiver_id == user_id).all(), str(user_id))
 
-async def send(data, user_id, db):
-    pass
+async def send(data, user_id: int, db: AsyncSession):
+    '''Function for DB insertion and to reciever sharing'''
+    db.add(Message(**data))
+    await db.commit()
+    await manager.send_single_message(data, str(user_id))
 
 actions = {
     "get": get,
