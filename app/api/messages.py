@@ -10,11 +10,11 @@ router = APIRouter(prefix="/messages", tags=["static"])
 
 @router.get("/ping")
 async def root():
-    return {"message": "pong"}
+    return {"message": "pong", "status": 200}
 
 @router.get("/")
 async def get():
-    return HTMLResponse(html)
+    return HTMLResponse(html, status_code=200)
 
 ''' ARGS
 (

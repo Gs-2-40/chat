@@ -15,10 +15,10 @@ async def login(response: Response, db: AsyncSession = Depends(get_db)):
     '''Authorization function. Username, password.'''
     data = requests.json()
     if not data.get("username") or not data.get("password"):
-        return {"message": "Login failed"}
+        return {"message": "Login failed", "status": 400}
     user = await db.query(User).filter(User.username == data.get("username")).first()
     if not user or not verify_password(data.get("password"), user.hashed_password):
-        return {"message": "Login failed"}
+        return {"message": "Login failed", "status": 400}
     try:
         response.set_cookie(
         key="access_token", 
@@ -28,27 +28,27 @@ async def login(response: Response, db: AsyncSession = Depends(get_db)):
         secure=True     # Только для HTTPS
         )
     except Exception:
-        return {"message": "Login failed"}
-    return {"message": "Login success"}
+        return {"message": "Login failed", "status": 400}
+    return {"message": "Login success", "status": 200}
 
 @router.post("/registration")
 async def registration(response: Response, db: AsyncSession = Depends(get_db)):
     '''Registration function. Username, password'''
     data = requests.json()
     if not data.get("username") or not data.get("password"):
-        return {"message": "Registration failed"}
+        return {"message": "Registration failed", "status": 400}
     user = await db.query(User).filter(User.username == data.get("username")).first()
     if user or len(data.get("password")) < 4:
-        return {"message": "Registration failed"}
+        return {"message": "Registration failed", "status": 400}
     try:
         db_user = User(username=data.get("username"), hashed_password=get_password_hash(data.get("password")), path_to_avatar=path_to_avatar)
         db.add(db_user)
         await db.commit()
         await db.refresh(db_user)
-        return {"message": "Registration success"}
+        return {"message": "Registration success", "status": 200}
     except Exception:
-        return {"message": "Login success"}
+        return {"message": "Login success", "status": 400}
 
 @router.get("/me")
 async def get_me():
-    return {"user": "current_user"}
+    return {"user": "current_user", "status": 200}
